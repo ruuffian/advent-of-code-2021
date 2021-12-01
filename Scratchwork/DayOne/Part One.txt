@@ -1,0 +1,30 @@
+package day1;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import static java.lang.Integer.MAX_VALUE;
+
+public class Part1 {
+
+    public int countIncrease(String a) throws FileNotFoundException {
+        File input = new File(a);
+        Scanner scanner = new Scanner(input);
+        List<Integer> ray = new ArrayList<>();
+        while (scanner.hasNext()) {
+            ray.add(scanner.nextInt());
+        }
+        int prev = MAX_VALUE;
+        int count = 0;
+        for (Integer integer : ray) {
+            if (integer > prev) {
+                count++;
+            }
+            prev = integer;
+        }
+        return count;
+    }
+}
