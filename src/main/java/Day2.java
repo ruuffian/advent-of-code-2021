@@ -10,15 +10,38 @@ public class Day2 {
     public Day2(File inputFile) throws FileNotFoundException {
         Scanner scanner = new Scanner(inputFile);
         while (scanner.hasNext()) {
-            ray.add(scanner.next());
+            ray.add(scanner.nextLine());
         }
     }
 
     public int partOne() {
-        return 0;
+        int depth = 0, horizontal = 0;
+        for (String s : ray) {
+            String[] movement = s.split(" ");
+            if (movement[0].equals("forward")) {
+                horizontal += Integer.parseInt(movement[1]);
+            } else if (movement[0].equals("down")) {
+                depth += Integer.parseInt(movement[1]);
+            } else {
+                depth -= Integer.parseInt(movement[1]);
+            }
+        }
+        return depth * horizontal;
     }
 
     public int partTwo() {
-        return 0;
+        int aim = 0, depth = 0, horizontal = 0;
+        for (String s : ray) {
+            String[] movement = s.split(" ");
+            if (movement[0].equals("down")) {
+                aim += Integer.parseInt(movement[1]);
+            } else if (movement[0].equals("up")) {
+                aim -= Integer.parseInt(movement[1]);
+            } else {
+                horizontal += Integer.parseInt(movement[1]);
+                depth += aim * Integer.parseInt(movement[1]);
+            }
+        }
+        return depth * horizontal;
     }
 }
