@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class Main {
+public class App{
     public static void main(String[] args) throws FileNotFoundException {
         // Inputs
         File day1Input = new File("src\\main\\resources\\day1.txt");
