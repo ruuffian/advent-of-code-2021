@@ -12,6 +12,7 @@ public class Main {
         Day2 run2 = new Day2(day2Input);
 
         System.out.println("Welcome to ruuffian's advent of code 2021!");
+        System.out.print('\n');
 
         // Print Solutions
         System.out.println("--Day One Problems--");
