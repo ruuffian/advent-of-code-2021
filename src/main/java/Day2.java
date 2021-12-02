@@ -5,43 +5,49 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Day2 {
-    private final List<String> ray = new ArrayList<>();
+    private final List<Instruction> ray = new ArrayList<>();
 
     public Day2(File inputFile) throws FileNotFoundException {
         Scanner scanner = new Scanner(inputFile);
         while (scanner.hasNext()) {
-            ray.add(scanner.nextLine());
+            Instruction command = new Instruction();
+            command.direction = scanner.next();
+            command.magnitude = scanner.nextInt();
+            ray.add(command);
         }
     }
 
     public int partOne() {
-        int depth = 0, horizontal = 0;
-        for (String s : ray) {
-            String[] movement = s.split(" ");
-            if (movement[0].equals("forward")) {
-                horizontal += Integer.parseInt(movement[1]);
-            } else if (movement[0].equals("down")) {
-                depth += Integer.parseInt(movement[1]);
+        int depth = 0, position = 0;
+        for (Instruction command : ray) {
+            if (command.direction.equals("forward")) {
+                position += command.magnitude;
+            } else if (command.direction.equals("down")) {
+                depth += command.magnitude;
             } else {
-                depth -= Integer.parseInt(movement[1]);
+                depth -= command.magnitude;
             }
         }
-        return depth * horizontal;
+        return depth * position;
     }
 
     public int partTwo() {
-        int aim = 0, depth = 0, horizontal = 0;
-        for (String s : ray) {
-            String[] movement = s.split(" ");
-            if (movement[0].equals("down")) {
-                aim += Integer.parseInt(movement[1]);
-            } else if (movement[0].equals("up")) {
-                aim -= Integer.parseInt(movement[1]);
+        int aim = 0, depth = 0, position = 0;
+        for (Instruction command : ray) {
+            if (command.direction.equals("down")) {
+                aim += command.magnitude;
+            } else if (command.direction.equals("up")) {
+                aim -= command.magnitude;
             } else {
-                horizontal += Integer.parseInt(movement[1]);
-                depth += aim * Integer.parseInt(movement[1]);
+                position += command.magnitude;
+                depth += aim * command.magnitude;
             }
         }
-        return depth * horizontal;
+        return depth * position;
     }
+}
+
+class Instruction {
+    String direction;
+    int magnitude;
 }

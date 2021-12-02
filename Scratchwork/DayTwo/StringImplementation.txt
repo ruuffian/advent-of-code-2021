@@ -1,0 +1,47 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Day2 {
+    private final List<String> ray = new ArrayList<>();
+
+    public Day2(File inputFile) throws FileNotFoundException {
+        Scanner scanner = new Scanner(inputFile);
+        while (scanner.hasNext()) {
+            ray.add(scanner.nextLine());
+        }
+    }
+
+    public int partOne() {
+        int depth = 0, position = 0;
+        for (String s : ray) {
+            String[] movement = s.split(" ");
+            if (movement[0].equals("forward")) {
+                position += Integer.parseInt(movement[1]);
+            } else if (movement[0].equals("down")) {
+                depth += Integer.parseInt(movement[1]);
+            } else {
+                depth -= Integer.parseInt(movement[1]);
+            }
+        }
+        return depth * position;
+    }
+
+    public int partTwo() {
+        int aim = 0, depth = 0, position = 0;
+        for (String s : ray) {
+            String[] movement = s.split(" ");
+            if (movement[0].equals("down")) {
+                aim += Integer.parseInt(movement[1]);
+            } else if (movement[0].equals("up")) {
+                aim -= Integer.parseInt(movement[1]);
+            } else {
+                position += Integer.parseInt(movement[1]);
+                depth += aim * Integer.parseInt(movement[1]);
+            }
+        }
+        return depth * position;
+    }
+}
