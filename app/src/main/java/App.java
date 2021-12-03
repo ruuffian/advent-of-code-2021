@@ -15,7 +15,7 @@ public class App {
         try {
             run1 = new Day1(day1Input);
             run2 = new Day2(day2Input);
-            run3 = new Day3(day2Input);
+            run3 = new Day3(day3Input);
         } catch (FileNotFoundException e) {
             System.out.println("File not found, please try again");
             System.out.println(e);
