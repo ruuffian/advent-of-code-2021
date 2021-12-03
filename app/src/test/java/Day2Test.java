@@ -7,15 +7,15 @@ import java.io.FileNotFoundException;
 public class Day2Test {
     @Test
     public void partOneTest() throws FileNotFoundException {
-        File input = new File("src\\test\\resources\\DayTwo\\day2.txt");
+        File input = new File("src\\test\\resources\\Day2\\example.txt");
         Day2 two = new Day2(input);
-        Assertions.assertEquals(two.partOne(), 150);
+        Assertions.assertEquals(150, two.partOne());
     }
 
     @Test
     public void partTwoTest() throws FileNotFoundException {
-        File input = new File("src\\test\\resources\\DayTwo\\day2.txt");
+        File input = new File("src\\test\\resources\\Day2\\example.txt");
         Day2 two = new Day2(input);
-        Assertions.assertEquals(two.partTwo(), 900);
+        Assertions.assertEquals(9090, two.partTwo());
     }
 }

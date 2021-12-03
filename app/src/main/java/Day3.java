@@ -3,122 +3,92 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Day3 {
-    private final List<Integer[]> ray = new ArrayList<>();
+    public final List<Integer[]> ray = new ArrayList<>();
 
     public Day3(File inputFile) throws FileNotFoundException {
         Scanner scanner = new Scanner(inputFile);
         while (scanner.hasNext()) {
-            String[] s = scanner.next().split("");
-            // map to ints.
-            ray.add();
+            ray.add(Arrays.stream(scanner.next().split("")).map(Integer::parseInt).toArray(Integer[]::new));
         }
     }
 
     public double partOne() {
-        int[] bits = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-        double gamma = 0;
-        double epsilon = 0;
-        for (String s : ray) {
-            String[] split = s.split("");
-            for (int i = 0; i < split.length; i++) {
-                if (split[i].equals("1"))
-                    bits[i] += 1;
-                else
-                    bits[i] -= 1;
-            }
-        }
+        Integer[] bits = new Integer[ray.get(0).length];
         for (int i = 0; i < bits.length; i++) {
-            if (bits[i] > 0)
-                bits[i] = 1;
-            else
-                bits[i] = 0;
+            bits[i] = commonBit(ray, i);
         }
+        long gammaRate = binaryConversion(bits);
+        long epsilonRate = binaryConversion(binaryNot(bits));
+        return gammaRate * epsilonRate;
+    }
+
+    public long partTwo() {
+        List<Integer[]> oxygen = ray;
+        List<Integer[]> carbon = ray;
+
+        int index = 0;
+        while (oxygen.size() > 1) {
+            List<Integer[]> tmp = new ArrayList<>();
+            int bit = commonBit(oxygen, index);
+            for (Integer[] item : oxygen) {
+                if (item[index] == bit)
+                    tmp.add(item);
+            }
+            index++;
+            oxygen = tmp;
+        }
+
+        index = 0;
+        while (carbon.size() > 1) {
+            List<Integer[]> tmp = new ArrayList<>();
+            int bit = commonBit(carbon, index);
+            for (Integer[] item : carbon) {
+                if (item[index] != bit)
+                    tmp.add(item);
+            }
+            index++;
+            carbon = tmp;
+        }
+        long oxygenGeneratorRating = binaryConversion(oxygen.get(0));
+        long carbonScrubberRating = binaryConversion(carbon.get(0));
+        return oxygenGeneratorRating * carbonScrubberRating;
+    }
+
+    public int getCommonBit(List<Integer[]> ray, int index) {
+        return this.commonBit(ray, index);
+    }
+
+    private int commonBit(List<Integer[]> ray, int index) {
+        int count = 0;
+        for (Integer[] item : ray) {
+            if (item[index] == 1)
+                count++;
+            else
+                count--;
+        }
+        if (count >= 0)
+            return 1;
+        else
+            return 0;
+    }
+
+    public long binaryConversion(Integer[] bits) {
+        long val = 0;
         for (int i = 0; i < bits.length; i++) {
             if (bits[i] == 1) {
-                gamma += Math.pow(2, (bits.length - 1 - i));
-            } else {
-                epsilon += Math.pow(2, (bits.length - 1 - i));
+                val += (long) Math.pow(2, (bits.length - 1 - i));
             }
         }
-        return gamma * epsilon;
+        return val;
     }
 
-    public int partTwo() {
-        int oxygen = oxygen();
-        int carbon = carbon();
-        return oxygen * carbon;
-    }
-
-    public int oxygen() {
-        int value = 0;
-        List<String> oxygen = ray;
-        int index = 0;
-        while (oxygen.size() > 1) {
-            List<String> tmp = new ArrayList<>();
-            int bit = 0;
-            char choice = ' ';
-            for (String s : oxygen) {
-                if (s.charAt(index) == '1') {
-                    bit++;
-                } else {
-                    bit--;
-                }
-            }
-            if (bit >= 0)
-                choice = '1';
+    public Integer[] binaryNot(Integer[] bits) {
+        for (int i = 0; i < bits.length; i++) {
+            if (bits[i] == 1)
+                bits[i] = 0;
             else
-                choice = '0';
-            for (int i = 0; i < oxygen.size(); i++) {
-                if (oxygen.get(i).charAt(index) == choice) {
-                    tmp.add(oxygen.get(i));
-                }
-            }
-            index++;
-            oxygen = tmp;
+                bits[i] = 1;
         }
-        String[] array = oxygen.get(0).split("");
-        for (int i = 0; i < array.length; i++) {
-            if (Integer.parseInt(array[i]) == 1) {
-                value += Math.pow(2, (array.length - 1 - i));
-            }
-        }
-        return value;
-    }
-
-    public int carbon() {
-        int value = 0;
-        List<String> oxygen = ray;
-        int index = 0;
-        while (oxygen.size() > 1) {
-            List<String> tmp = new ArrayList<>();
-            int bit = 0;
-            char choice = ' ';
-            for (String s : oxygen) {
-                if (s.charAt(index) == '1') {
-                    bit++;
-                } else {
-                    bit--;
-                }
-            }
-            if (bit >= 0)
-                choice = '1';
-            else
-                choice = '0';
-            for (int i = 0; i < oxygen.size(); i++) {
-                if (oxygen.get(i).charAt(index) != choice) {
-                    tmp.add(oxygen.get(i));
-                }
-            }
-            index++;
-            oxygen = tmp;
-        }
-        String[] array = oxygen.get(0).split("");
-        for (int i = 0; i < array.length; i++) {
-            if (Integer.parseInt(array[i]) == 1) {
-                value += Math.pow(2, (array.length - 1 - i));
-            }
-        }
-        return value;
+        return bits;
     }
 }
