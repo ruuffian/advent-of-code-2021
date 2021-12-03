@@ -3,14 +3,12 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Day3 {
-    private final List<Integer[]> ray = new ArrayList<>();
+    private final List<String> ray = new ArrayList<>();
 
     public Day3(File inputFile) throws FileNotFoundException {
         Scanner scanner = new Scanner(inputFile);
         while (scanner.hasNext()) {
-            String[] s = scanner.next().split("");
-            // map to ints.
-            ray.add();
+            ray.add(scanner.next());
         }
     }
 
