@@ -1,17 +1,26 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class App{
-    public static void main(String[] args) throws FileNotFoundException {
+public class App {
+    public static void main(String[] args) {
         // Inputs
         File day1Input = new File("src\\main\\resources\\day1.txt");
         File day2Input = new File("src\\main\\resources\\day2.txt");
         File day3Input = new File("src\\main\\resources\\day3.txt");
 
         // Init Each Day
-        Day1 run1 = new Day1(day1Input);
-        Day2 run2 = new Day2(day2Input);
-        Day3 run3 = new Day3(day2Input);
+        Day1 run1 = null;
+        Day2 run2 = null;
+        Day3 run3 = null;
+        try {
+            run1 = new Day1(day1Input);
+            run2 = new Day2(day2Input);
+            run3 = new Day3(day2Input);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found, please try again");
+            System.out.println(e);
+            System.exit(-1);
+        }
 
         System.out.println("Welcome to ruuffian's advent of code 2021!");
         System.out.print('\n');
