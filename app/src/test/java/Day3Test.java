@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 public class Day3Test {
     @Test
     public void commonBitTest1() throws FileNotFoundException {
-        File input = new File("src\\test\\resources\\Day3\\example.txt");
+        File input = new File("src\\test\\resources\\Day3\\commonBit1.txt");
         Day3 obj = new Day3(input);
         Assertions.assertEquals(1, obj.getCommonBit(obj.ray, 0));
         Assertions.assertEquals(0, obj.getCommonBit(obj.ray, 1));
