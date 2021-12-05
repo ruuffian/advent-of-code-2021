@@ -109,7 +109,7 @@ class Board {
 
     public Board(Integer[][] valueBoard) {
         this.valueBoard = valueBoard;
-        selectBoard = new boolean[5][5];
+        selectBoard = new boolean[valueBoard.length][valueBoard.length];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 selectBoard[i][j] = false;
