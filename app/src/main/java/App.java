@@ -9,6 +9,8 @@ public class App {
         File day3Input = new File("src\\main\\resources\\day3.txt");
         File day4Input = new File("src\\main\\resources\\day4.txt");
         File day5Input = new File("src\\main\\resources\\day5.txt");
+        File day6Input = new File("src\\main\\resources\\day6.txt");
+
 
         // Init Each Day
         Day1 run1 = null;
@@ -16,6 +18,8 @@ public class App {
         Day3 run3 = null;
         Day4 run4 = null;
         Day5 run5 = null;
+        Day6 run6 = null;
+
 
         try {
             run1 = new Day1(day1Input);
@@ -23,6 +27,7 @@ public class App {
             run3 = new Day3(day3Input);
             run4 = new Day4(day4Input);
             run5 = new Day5(day5Input);
+            run6 = new Day6(day6Input);
         } catch (FileNotFoundException e) {
             System.out.println("File not found, please try again");
             System.out.println(e);
@@ -52,5 +57,9 @@ public class App {
         System.out.println("--Day Five Problems--");
         System.out.println("Part One:: " + run5.partOne());
         System.out.println("Part Two:: " + run5.partTwo());
+
+        System.out.println("--Day Six Problems--");
+        System.out.println("Part One:: " + run6.partOne());
+        System.out.println("Part Two:: " + run6.partTwo());
     }
 }
