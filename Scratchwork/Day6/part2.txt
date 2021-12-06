@@ -1,0 +1,34 @@
+    public long partTwo() {
+        long[] fishCount = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (Fish fish : ray2) {
+            fishCount[fish.days]++;
+        }
+        for (int i = 0; i < 256; i++) {
+            long tmp = fishCount[0];
+            for (int j = 0; j < 8; j++) {
+                fishCount[j] = fishCount[j + 1];
+            }
+            fishCount[8] = tmp;
+            fishCount[6] += tmp;
+        }
+        long sum = 0;
+        for (int i = 0; i < fishCount.length; i++) {
+            sum += fishCount[i];
+        }
+        return sum;
+    }
+
+    class Fish {
+        int days;
+
+        public Fish(int days) {
+            this.days = days;
+        }
+
+        public void day() {
+            if (days == 0)
+                days = 6;
+            else
+                days--;
+        }
+    }
