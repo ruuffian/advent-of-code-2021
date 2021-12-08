@@ -49,22 +49,15 @@ public class Day4 {
 
     public boolean boardComplete(boolean[][] board) {
         for (int i = 0; i < board.length; i++) {
-            int count = 0;
+            int row = 0;
+            int col = 0;
             for (int j = 0; j < board.length; j++) {
                 if (board[i][j])
-                    count++;
+                    row++;
+                if (board[j][i])
+                    col++;
             }
-            if (count == 5)
-                return true;
-        }
-        // PLEASE FOR THE LOVE OF GOD REWRITE THIS METHOD
-        for (int j = 0; j < board.length; j++) {
-            int count = 0;
-            for (int i = 0; i < board.length; i++) {
-                if (board[i][j])
-                    count++;
-            }
-            if (count == 5)
+            if (row == 5 || col == 5)
                 return true;
         }
         return false;
