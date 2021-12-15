@@ -1,7 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-
+/*
+REFACTOR WITH ENUMS!!!
+ */
 public class Day10 {
     private final List<char[]> lines = new ArrayList<>();
 
